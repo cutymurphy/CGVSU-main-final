@@ -30,4 +30,25 @@ public class Model {
     public void setPolygons(ArrayList<Polygon> polygons) {
         this.polygons = polygons;
     }
+
+    public Model getCopy() {
+        Model copiedModel = new Model();
+        // Копируем вершины
+        for (Vector3f vertex : this.vertices) {
+            copiedModel.vertices.add(new Vector3f(vertex));
+        }
+        // Копируем нормали
+        for (Vector3f normal : this.normals) {
+            copiedModel.normals.add(new Vector3f(normal));
+        }
+        // Копируем полигоны
+        for (Polygon polygon : this.polygons) {
+            Polygon copiedPolygon = new Polygon();
+            copiedPolygon.setVertexIndices(new ArrayList<>(polygon.getVertexIndices()));
+            copiedPolygon.setTextureVertexIndices(new ArrayList<>(polygon.getTextureVertexIndices()));
+            copiedPolygon.setNormalIndices(new ArrayList<>(polygon.getNormalIndices()));
+            copiedModel.polygons.add(copiedPolygon);
+        }
+        return copiedModel;
+    }
 }

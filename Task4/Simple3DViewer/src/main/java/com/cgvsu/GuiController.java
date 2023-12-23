@@ -42,6 +42,7 @@ public class GuiController {
     private Canvas canvas;
 
     private Model mesh = null;
+    private Model copyOfMesh = null;
 
     private Camera camera = new Camera(
             new Vector3f(0, 00, 100),
@@ -154,10 +155,17 @@ public class GuiController {
     private void onTriangulateModel() {
         if (mesh != null) {
             TriangulatedModelWithCorrectNormal newModel = new TriangulatedModelWithCorrectNormal(mesh);
+            copyOfMesh = mesh.getCopy();
             mesh.setPolygons(newModel.getTriangulatedPolygons());
             // После триангуляции необходимо обновить отображение
             RenderEngine.render(canvas.getGraphicsContext2D(), camera, mesh, (int) canvas.getWidth(), (int) canvas.getHeight());
         }
+    }
+
+    @FXML
+    private void onPrintOriginalMesh() {
+        mesh = copyOfMesh.getCopy();
+        RenderEngine.render(canvas.getGraphicsContext2D(), camera, mesh, (int) canvas.getWidth(), (int) canvas.getHeight());
     }
 
 

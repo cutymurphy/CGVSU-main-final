@@ -62,6 +62,11 @@
                     <KeyCodeCombination alt="UP" control="DOWN" meta="UP" shift="UP" shortcut="UP" code="T"/>
                 </accelerator>
             </MenuItem>
+            <MenuItem mnemonicParsing="false" onAction="#onPrintOriginalMesh" text="Original Model">
+                <accelerator>
+                    <KeyCodeCombination alt="UP" control="DOWN" meta="UP" shift="UP" shortcut="UP" code="B"/>
+                </accelerator>
+            </MenuItem>
         </Menu>
 
     </MenuBar>
