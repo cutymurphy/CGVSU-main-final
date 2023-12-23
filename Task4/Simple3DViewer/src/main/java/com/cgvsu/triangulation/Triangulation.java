@@ -72,12 +72,12 @@ public class Triangulation {
         Vector3f vector2 = Vector3f.fromTwoPoints(model.vertices.get(vertexIndices.get(0)), model.vertices.get(vertexIndices.get(verticesCount - 1)));
 
         Vector3f resultVector = new Vector3f();
-        resultVector.cross(vector1, vector2);
+        resultVector.crossProduct(vector1, vector2);
         return resultVector;
     }
 
     protected static Vector3f calculateNormalForVertexInModel(final Model model, final int vertexIndex) {
-        List<Vector3f> saved = new ArrayList<>();
+        ArrayList   <Vector3f> saved = new ArrayList<>();
 
         for (Polygon polygon : model.polygons) {
             if (polygon.getVertexIndices().contains(vertexIndex)) {

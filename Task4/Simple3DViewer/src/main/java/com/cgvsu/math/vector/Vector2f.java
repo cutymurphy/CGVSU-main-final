@@ -59,4 +59,16 @@ public class Vector2f {
     public double dotProduct(Vector2f other) {
         return this.x * other.x + this.y * other.y;
     }
+
+    public double getX() {
+        return x;
+    }
+
+    public double getY() {
+        return y;
+    }
+
+    public static double getEps() {
+        return eps;
+    }
 }

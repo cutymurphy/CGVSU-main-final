@@ -1,5 +1,7 @@
 package com.cgvsu.math.vector;
 
+import java.util.ArrayList;
+
 public class Vector3f {
     public double x;
     public double y;
@@ -11,6 +13,17 @@ public class Vector3f {
         this.y = y;
         this.z = z;
     }
+
+    public Vector3f() {
+
+    }
+
+    public Vector3f(Vector3f vector3f) {
+        this.x = vector3f.x;
+        this.y = vector3f.y;
+        this.z = vector3f.z;
+    }
+
     public double get(int index) {
         switch (index){
             case 0: return x;
@@ -63,11 +76,43 @@ public class Vector3f {
     }
 
     // Векторное произведение векторов
-    public Vector3f crossProduct(Vector3f other) {
+    public Vector3f crossProduct(Vector3f first, Vector3f other) {
         return new Vector3f(
-                this.y * other.z - this.z * other.y,
-                this.z * other.x - this.x * other.z,
-                this.x * other.y - this.y * other.x
+                first.y * other.z - first.z * other.y,
+                first.z * other.x - first.x * other.z,
+                first.x * other.y - first.y * other.x
         );
+    }
+
+    public static Vector3f fromTwoPoints(Vector3f first, Vector3f second) {
+        return new Vector3f(second.x - first.x,
+                second.y - first.y,
+                second.z - first.z);
+    }
+
+    // Сложение векторов
+    public static Vector3f sum(ArrayList<Vector3f> vectors) {
+        Vector3f sum = new Vector3f();
+        for (Vector3f vector : vectors) {
+            sum = sum.add(vector);
+        }
+        return sum;
+    }
+
+
+    public double getX() {
+        return x;
+    }
+
+    public double getY() {
+        return y;
+    }
+
+    public double getZ() {
+        return z;
+    }
+
+    public static double getEps() {
+        return eps;
     }
 }
