@@ -53,14 +53,14 @@ public class Matrix3x3{
         return new Vector3f(result[0], result[1], result[2]);
     }
 
-    // Умножение на матрицу
+    // Умножение матрицы на матрицу (теперь векторы - столбцы)
     public Matrix3x3 multiply(Matrix3x3 other) {
         double[][] result = new double[3][3];
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
                 result[i][j] = 0;
                 for (int k = 0; k < 3; k++) {
-                    result[i][j] += this.matrix[i][k] * other.matrix[k][j];
+                    result[i][j] += this.matrix[k][j] * other.matrix[i][k];
                 }
             }
         }

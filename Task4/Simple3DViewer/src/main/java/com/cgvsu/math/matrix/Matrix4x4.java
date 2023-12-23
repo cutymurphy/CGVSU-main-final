@@ -38,7 +38,7 @@ public class Matrix4x4{
         return new Matrix4x4(result);
     }
 
-    // Умножение на вектор4Д
+    // Умножение матрицы на вектор4Д (теперь вектор - столбец)
     public Vector4f multiply(Vector4f vector) {
         if (vector == null) {
             throw new NullPointerException("Вектор не может быть нулевым");
@@ -47,7 +47,7 @@ public class Matrix4x4{
         for (int i = 0; i < 4; i++) {
             result[i] = 0;
             for (int j = 0; j < 4; j++) {
-                result[i] += this.matrix[i][j] * vector.get(j);
+                result[i] += this.matrix[j][i] * vector.get(j);
             }
         }
         return new Vector4f(result[0], result[1], result[2], result[3]);
