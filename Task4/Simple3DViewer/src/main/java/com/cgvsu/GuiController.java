@@ -1,5 +1,7 @@
 package com.cgvsu;
 
+import com.cgvsu.objwriter.ObjWriter;
+import com.cgvsu.objwriter.ObjWriterException;
 import com.cgvsu.render_engine.RenderEngine;
 import javafx.fxml.FXML;
 import javafx.animation.Animation;
@@ -7,6 +9,7 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.control.Alert;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.FileChooser;
@@ -116,6 +119,40 @@ public class GuiController {
         } catch (IOException exception) {
 
         }
+    }
+
+    @FXML
+    private void onSaveModelMenuItemClick() {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Model (*.obj)", "*.obj"));
+        fileChooser.setTitle("Save Model");
+
+        // Установка начального каталога
+        File initialDirectory = new File("D:\\IdeaProjects\\CGVSU-main\\3DModels");
+        fileChooser.setInitialDirectory(initialDirectory);
+
+        File file = fileChooser.showOpenDialog((Stage) canvas.getScene().getWindow());
+        if (file == null) {
+            return;
+        }
+
+        Path fileName = Path.of(file.getAbsolutePath());
+
+        try {
+            ObjWriter.writeModelToObjFile(String.valueOf(fileName), mesh);
+            showSaveSuccessAlert(fileName);
+            // todo: обработка ошибок
+        } catch (ObjWriterException exception) {
+
+        }
+    }
+
+    private void showSaveSuccessAlert(Path filePath) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Успех");
+        alert.setHeaderText(null);
+        alert.setContentText("Модель сохранена успешно в " + filePath.toString() + " !");
+        alert.showAndWait();
     }
 
     @FXML
