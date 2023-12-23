@@ -11,6 +11,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.FileChooser;
 import javafx.util.Duration;
+
+import java.awt.event.MouseEvent;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.io.IOException;
@@ -62,6 +64,32 @@ public class GuiController {
 
         timeline.getKeyFrames().add(frame);
         timeline.play();
+
+        canvas.setOnMousePressed(event -> {
+            dragStartX = event.getX();
+            dragStartY = event.getY();
+            isDragging = true;
+        });
+
+        canvas.setOnMouseReleased(event -> {
+            isDragging = false;
+        });
+
+        canvas.setOnMouseDragged(event -> {
+            if (isDragging) {
+                double dragEndX = event.getX();
+                double dragEndY = event.getY();
+
+                double deltaX = (dragEndX - dragStartX) * 0.01;
+                double deltaY = (dragEndY - dragStartY) * 0.01;
+
+                camera.movePosition(new Vector3f((float) deltaX, (float) -deltaY, 0));
+
+                dragStartX = dragEndX;
+                dragStartY = dragEndY;
+            }
+        });
+
     }
 
     @FXML
@@ -119,4 +147,10 @@ public class GuiController {
     public void handleCameraDown(ActionEvent actionEvent) {
         camera.movePosition(new Vector3f(0, -TRANSLATION, 0));
     }
+
+
+    private double dragStartX, dragStartY;
+
+    private boolean isDragging = false;
+
 }

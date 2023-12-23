@@ -12,6 +12,15 @@ public class GraphicConveyor {
         return new Matrix4f(matrix);
     }
 
+    public static Matrix4f scale(float scaleX, float scaleY, float scaleZ) {
+        Matrix4f result = new Matrix4f();
+        result.setIdentity();
+        result.m00 = scaleX;
+        result.m11 = scaleY;
+        result.m22 = scaleZ;
+        return result;
+    }
+
     public static Matrix4f lookAt(Vector3f eye, Vector3f target) {
         return lookAt(eye, target, new Vector3f(0F, 1.0F, 0F));
     }
