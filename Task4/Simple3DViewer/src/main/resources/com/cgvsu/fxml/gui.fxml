@@ -56,6 +56,14 @@
             </MenuItem>
         </Menu>
 
+        <Menu mnemonicParsing="false" text="Triangulate Model">
+            <MenuItem mnemonicParsing="false" onAction="#onTriangulateModel" text="Triangulate Model">
+                <accelerator>
+                    <KeyCodeCombination alt="UP" control="DOWN" meta="UP" shift="UP" shortcut="UP" code="T"/>
+                </accelerator>
+            </MenuItem>
+        </Menu>
+
     </MenuBar>
 
     <Canvas fx:id="canvas" width="1600" height="870" AnchorPane.topAnchor="30.0"/>

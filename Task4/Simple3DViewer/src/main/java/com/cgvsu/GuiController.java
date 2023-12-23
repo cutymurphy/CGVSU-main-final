@@ -1,9 +1,12 @@
 package com.cgvsu;
 
+import com.cgvsu.model.Polygon;
 import com.cgvsu.objreader.ObjReaderException;
 import com.cgvsu.objwriter.ObjWriter;
 import com.cgvsu.objwriter.ObjWriterException;
 import com.cgvsu.render_engine.RenderEngine;
+import com.cgvsu.triangulation.TriangulatedModelWithCorrectNormal;
+import com.cgvsu.triangulation.Triangulation;
 import javafx.fxml.FXML;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
@@ -20,6 +23,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.io.IOException;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 import javax.vecmath.Vector3f;
 
 import com.cgvsu.model.Model;
@@ -144,6 +149,17 @@ public class GuiController {
             showSaveErrorAlert(exception);
         }
     }
+
+    @FXML
+    private void onTriangulateModel() {
+        if (mesh != null) {
+            TriangulatedModelWithCorrectNormal newModel = new TriangulatedModelWithCorrectNormal(mesh);
+            mesh.setPolygons(newModel.getTriangulatedPolygons());
+            // После триангуляции необходимо обновить отображение
+            RenderEngine.render(canvas.getGraphicsContext2D(), camera, mesh, (int) canvas.getWidth(), (int) canvas.getHeight());
+        }
+    }
+
 
     private void showSaveSuccessAlert(Path filePath) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
