@@ -1,5 +1,6 @@
 package com.cgvsu;
 
+import com.cgvsu.objreader.ObjReaderException;
 import com.cgvsu.objwriter.ObjWriter;
 import com.cgvsu.objwriter.ObjWriterException;
 import com.cgvsu.render_engine.RenderEngine;
@@ -15,7 +16,6 @@ import javafx.stage.Stage;
 import javafx.stage.FileChooser;
 import javafx.util.Duration;
 
-import java.awt.event.MouseEvent;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.io.IOException;
@@ -115,9 +115,8 @@ public class GuiController {
         try {
             String fileContent = Files.readString(fileName);
             mesh = ObjReader.read(fileContent);
-            // todo: обработка ошибок
-        } catch (IOException exception) {
-
+        } catch (ObjReaderException | IOException exception) {
+            showLoadErrorAlert(exception);
         }
     }
 
@@ -141,9 +140,8 @@ public class GuiController {
         try {
             ObjWriter.writeModelToObjFile(String.valueOf(fileName), mesh);
             showSaveSuccessAlert(fileName);
-            // todo: обработка ошибок
         } catch (ObjWriterException exception) {
-
+            showSaveErrorAlert(exception);
         }
     }
 
@@ -152,6 +150,22 @@ public class GuiController {
         alert.setTitle("Успех");
         alert.setHeaderText(null);
         alert.setContentText("Модель сохранена успешно в " + filePath.toString() + " !");
+        alert.showAndWait();
+    }
+
+    private void showLoadErrorAlert(Exception error) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Ошибка!!!");
+        alert.setHeaderText(null);
+        alert.setContentText("Ошибка при открытии модели из файла: " + error.toString());
+        alert.showAndWait();
+    }
+
+    private void showSaveErrorAlert(Exception error) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Ошибка!!!");
+        alert.setHeaderText(null);
+        alert.setContentText("Ошибка при сохранении в модели файл " + error.toString());
         alert.showAndWait();
     }
 
