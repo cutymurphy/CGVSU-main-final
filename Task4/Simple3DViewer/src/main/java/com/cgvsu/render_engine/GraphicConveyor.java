@@ -21,6 +21,41 @@ public class GraphicConveyor {
         return result;
     }
 
+    public static Matrix4f rotate(float angle, float axisX, float axisY, float axisZ) {
+        Matrix4f result = new Matrix4f();
+        result.setIdentity();
+        float c = (float) Math.cos(angle);
+        float s = (float) Math.sin(angle);
+        float t = 1.0f - c;
+
+        result.m00 = axisX * axisX * t + c;
+        result.m01 = axisX * axisY * t - axisZ * s;
+        result.m02 = axisX * axisZ * t + axisY * s;
+
+        result.m10 = axisY * axisX * t + axisZ * s;
+        result.m11 = axisY * axisY * t + c;
+        result.m12 = axisY * axisZ * t - axisX * s;
+
+        result.m20 = axisZ * axisX * t - axisY * s;
+        result.m21 = axisZ * axisY * t + axisX * s;
+        result.m22 = axisZ * axisZ * t + c;
+
+        return result;
+    }
+
+    public static Matrix4f translate(float translateX, float translateY, float translateZ) {
+        Matrix4f result = new Matrix4f();
+        result.setIdentity();
+        result.setTranslation(new Vector3f(translateX, translateY, translateZ));
+        return result;
+    }
+
+    public static Matrix4f transformModel(Matrix4f modelMatrix, Matrix4f transformMatrix) {
+        Matrix4f result = new Matrix4f();
+        result.mul(modelMatrix, transformMatrix);
+        return result;
+    }
+
     public static Matrix4f lookAt(Vector3f eye, Vector3f target) {
         return lookAt(eye, target, new Vector3f(0F, 1.0F, 0F));
     }
