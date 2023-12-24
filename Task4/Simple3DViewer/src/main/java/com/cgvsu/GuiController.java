@@ -11,7 +11,7 @@ import com.cgvsu.objwriter.ObjWriter;
 import com.cgvsu.objwriter.ObjWriterException;
 import com.cgvsu.render_engine.Camera;
 import com.cgvsu.render_engine.RenderEngine;
-import com.cgvsu.triangulation.TriangulatedModelWithCorrectNormal;
+import com.cgvsu.triangulation.TriangulatedModel;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -31,10 +31,8 @@ import javax.vecmath.Vector3f;
 
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.Arrays;
 
 public class GuiController {
 
@@ -160,7 +158,7 @@ public class GuiController {
     @FXML
     private void onTriangulateModel() {
         if (mesh != null) {
-            TriangulatedModelWithCorrectNormal newModel = new TriangulatedModelWithCorrectNormal(mesh);
+            TriangulatedModel newModel = new TriangulatedModel(mesh);
             mesh.setPolygons(newModel.getTriangulatedPolygons());
             // После триангуляции необходимо обновить отображение
             RenderEngine.render(canvas.getGraphicsContext2D(), camera, mesh, (int) canvas.getWidth(), (int) canvas.getHeight());

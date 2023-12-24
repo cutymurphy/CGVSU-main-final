@@ -5,11 +5,11 @@ import com.cgvsu.model.Polygon;
 
 import java.util.ArrayList;
 
-public class TriangulatedModelWithCorrectNormal {
+public class TriangulatedModel {
     private final Model initialModel;
     private final ArrayList<Polygon> triangulatedPolygons;
 
-    public TriangulatedModelWithCorrectNormal(Model initialModel) {
+    public TriangulatedModel(Model initialModel) {
         this.initialModel = initialModel;
         this.triangulatedPolygons = triangulatePolygons(initialModel.polygons);
     }
