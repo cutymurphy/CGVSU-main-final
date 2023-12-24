@@ -2,10 +2,10 @@ package com.cgvsu.math.matrix;
 
 import com.cgvsu.math.vector.Vector4f;
 
-public class Matrix4x4{
+public class Matrix4f {
     private double[][] matrix = new double[4][4];
 
-    public Matrix4x4(double[][] data) {
+    public Matrix4f(double[][] data) {
         if (data.length != 4 || data[0].length != 4) {
             throw new IllegalArgumentException("Матрица должна быть 4x4");
         }
@@ -17,25 +17,25 @@ public class Matrix4x4{
     }
 
     // Сложение матриц
-    public Matrix4x4 add(Matrix4x4 other) {
+    public Matrix4f add(Matrix4f other) {
         double[][] result = new double[4][4];
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
                 result[i][j] = this.matrix[i][j] + other.matrix[i][j];
             }
         }
-        return new Matrix4x4(result);
+        return new Matrix4f(result);
     }
 
     // Вычитание матриц
-    public Matrix4x4 subtract(Matrix4x4 other) {
+    public Matrix4f subtract(Matrix4f other) {
         double[][] result = new double[4][4];
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
                 result[i][j] = this.matrix[i][j] - other.matrix[i][j];
             }
         }
-        return new Matrix4x4(result);
+        return new Matrix4f(result);
     }
 
     // Умножение матрицы на вектор4Д (теперь вектор - столбец)
@@ -54,7 +54,7 @@ public class Matrix4x4{
     }
 
     // Умножение на матрицу
-    public Matrix4x4 multiply(Matrix4x4 other) {
+    public Matrix4f multiply(Matrix4f other) {
         double[][] result = new double[4][4];
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
@@ -64,40 +64,40 @@ public class Matrix4x4{
                 }
             }
         }
-        return new Matrix4x4(result);
+        return new Matrix4f(result);
     }
 
     // Транспонирование
-    public Matrix4x4 transpose() {
+    public Matrix4f transpose() {
         double[][] result = new double[4][4];
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
                 result[i][j] = this.matrix[j][i];
             }
         }
-        return new Matrix4x4(result);
+        return new Matrix4f(result);
     }
 
     // Задание единичной матрицы
-    public static Matrix4x4 identity() {
+    public static Matrix4f identity() {
         double[][] identityMatrix = new double[][]{
                 {1, 0, 0, 0},
                 {0, 1, 0, 0},
                 {0, 0, 1, 0},
                 {0, 0, 0, 1}
         };
-        return new Matrix4x4(identityMatrix);
+        return new Matrix4f(identityMatrix);
     }
 
     // Задание нулевой матрицы
-    public static Matrix4x4 zero() {
+    public static Matrix4f zero() {
         double[][] zeroMatrix = new double[][]{
                 {0, 0, 0, 0},
                 {0, 0, 0, 0},
                 {0, 0, 0, 0},
                 {0, 0, 0, 0}
         };
-        return new Matrix4x4(zeroMatrix);
+        return new Matrix4f(zeroMatrix);
     }
     public double determinate(){
         double[][] data1 = new double[3][3];
@@ -130,10 +130,10 @@ public class Matrix4x4{
             }
         }
 
-        Matrix3x3 m1 = new Matrix3x3(data1);
-        Matrix3x3 m2 = new Matrix3x3(data2);
-        Matrix3x3 m3 = new Matrix3x3(data3);
-        Matrix3x3 m4 = new Matrix3x3(data4);
+        Matrix3f m1 = new Matrix3f(data1);
+        Matrix3f m2 = new Matrix3f(data2);
+        Matrix3f m3 = new Matrix3f(data3);
+        Matrix3f m4 = new Matrix3f(data4);
 
         return (matrix[0][0]*m1.determinate()-matrix[0][1]*m2.determinate()+matrix[0][2]*m3.determinate()-matrix[0][3]*m4.determinate());
     }

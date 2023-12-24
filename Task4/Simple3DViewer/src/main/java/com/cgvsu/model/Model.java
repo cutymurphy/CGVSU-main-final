@@ -1,7 +1,7 @@
 package com.cgvsu.model;
 
+import com.cgvsu.math.vector.*;
 
-import javax.vecmath.*;
 import java.util.*;
 
 public class Model {

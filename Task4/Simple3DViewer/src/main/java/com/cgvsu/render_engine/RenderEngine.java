@@ -3,9 +3,12 @@ package com.cgvsu.render_engine;
 import java.util.ArrayList;
 
 import javafx.scene.canvas.GraphicsContext;
-import javax.vecmath.*;
+import com.cgvsu.math.vector.*;
 import com.cgvsu.model.Model;
 import javafx.scene.paint.Color;
+
+import javax.vecmath.Matrix4f;
+import javax.vecmath.Point2f;
 
 import static com.cgvsu.render_engine.GraphicConveyor.*;
 

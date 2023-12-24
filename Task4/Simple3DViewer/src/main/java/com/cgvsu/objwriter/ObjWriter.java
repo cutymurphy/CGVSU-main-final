@@ -3,7 +3,7 @@ package com.cgvsu.objwriter;
 import com.cgvsu.model.Model;
 import com.cgvsu.model.Polygon;
 
-import javax.vecmath.*;
+import com.cgvsu.math.vector.*;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -38,7 +38,7 @@ public class ObjWriter {
 
     protected static void writeTextureVerticesOfModel(PrintWriter printWriter, List<Vector2f> textureVertices) {
         for (Vector2f vertex : textureVertices) {
-            printWriter.println(OBJ_TEXTURE_TOKEN + " " + vertex.x + " " + vertex.y);
+            printWriter.println(OBJ_TEXTURE_TOKEN + " " + vertex.getX() + " " + vertex.getY());
         }
         printWriter.println();
     }

@@ -3,7 +3,7 @@ package com.cgvsu.objreader;
 import com.cgvsu.model.Model;
 import com.cgvsu.model.Polygon;
 
-import javax.vecmath.*;
+import com.cgvsu.math.vector.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;

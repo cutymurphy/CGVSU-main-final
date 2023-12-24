@@ -1,6 +1,6 @@
 package com.cgvsu.triangulation;
 
-import javax.vecmath.*;
+import com.cgvsu.math.vector.*;
 import com.cgvsu.model.Model;
 import com.cgvsu.model.Polygon;
 
