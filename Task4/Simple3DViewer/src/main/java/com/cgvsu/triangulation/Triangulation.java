@@ -82,7 +82,7 @@ public class Triangulation {
         for (Polygon polygon : model.polygons) {
             if (polygon.getVertexIndices().contains(vertexIndex)) {
                 Vector3f polygonNormal = calculateNormalForPolygon(polygon, model);
-                if (polygonNormal.length() > 0) {
+                if (polygonNormal.len() > 0) {
                     saved.add(polygonNormal);
                 }
             }
