@@ -15,6 +15,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ColorPicker;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
@@ -160,6 +161,23 @@ public class GuiController {
     }
 
     @FXML
+    private ColorPicker colorPicker;
+
+    @FXML
+    private void onRasterizeModel() {
+        Color chosenColor = colorPicker.getValue(); // Получаем выбранный цвет из ColorPicker
+
+        // Теперь можно использовать этот цвет в вашей логике рендеринга
+        RenderEngine.renderColor(
+                canvas.getGraphicsContext2D(),
+                camera,
+                mesh,
+                (int) canvas.getWidth(),
+                (int) canvas.getHeight(),
+                chosenColor // Используем выбранный цвет
+        );    }
+
+    @FXML
     private void onPrintOriginalMesh() {
         mesh = copyOfMesh.getCopy();
         RenderEngine.renderColor(canvas.getGraphicsContext2D(), camera, mesh, (int) canvas.getWidth(), (int) canvas.getHeight(), Color.BLACK);
@@ -170,6 +188,7 @@ public class GuiController {
         RenderEngine.renderColor(canvas.getGraphicsContext2D(), camera, mesh, (int) canvas.getWidth(), (int) canvas.getHeight(),
                 Color.RED);
     }
+
     @FXML
     private void onRasterizeModelGreen() {
         RenderEngine.renderColor(canvas.getGraphicsContext2D(), camera, mesh, (int) canvas.getWidth(), (int) canvas.getHeight(),
