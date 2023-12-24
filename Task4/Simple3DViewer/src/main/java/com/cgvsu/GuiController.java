@@ -1,5 +1,7 @@
 package com.cgvsu;
 
+import com.cgvsu.deletePolygons.PolygonsDeleter;
+import com.cgvsu.deletePolygons.PolygonsDeleterException;
 import com.cgvsu.deleteVertex.VertexDeleter;
 import com.cgvsu.deleteVertex.VertexDeleterException;
 import com.cgvsu.model.Model;
@@ -124,6 +126,7 @@ public class GuiController {
         try {
             String fileContent = Files.readString(fileName);
             mesh = ObjReader.read(fileContent);
+            copyOfMesh = mesh.getCopy();
         } catch (ObjReaderException | IOException exception) {
             showLoadErrorAlert(exception);
         }
@@ -158,7 +161,6 @@ public class GuiController {
     private void onTriangulateModel() {
         if (mesh != null) {
             TriangulatedModelWithCorrectNormal newModel = new TriangulatedModelWithCorrectNormal(mesh);
-            copyOfMesh = mesh.getCopy();
             mesh.setPolygons(newModel.getTriangulatedPolygons());
             // После триангуляции необходимо обновить отображение
             RenderEngine.render(canvas.getGraphicsContext2D(), camera, mesh, (int) canvas.getWidth(), (int) canvas.getHeight());
@@ -176,6 +178,21 @@ public class GuiController {
             VertexDeleter.deleteVertices(mesh, indices);
             RenderEngine.render(canvas.getGraphicsContext2D(), camera, mesh, (int) canvas.getWidth(), (int) canvas.getHeight());
         } catch (VertexDeleterException | NumberFormatException exception) {
+            showDeleteVertexErrorAlert(exception);
+        }
+    }
+
+    @FXML
+    private TextField textField2;
+
+    @FXML
+    private void onDeletePolygons() {
+        String stringOfVertexes = textField2.getText();
+        try {
+            int[] indices = getNumbersFromStr(stringOfVertexes);
+            PolygonsDeleter.deletePolygons(mesh, indices);
+            RenderEngine.render(canvas.getGraphicsContext2D(), camera, mesh, (int) canvas.getWidth(), (int) canvas.getHeight());
+        } catch (PolygonsDeleterException | NumberFormatException exception) {
             showDeleteVertexErrorAlert(exception);
         }
     }

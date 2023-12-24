@@ -33,12 +33,12 @@
         <Menu mnemonicParsing="false" text="Camera">
             <MenuItem mnemonicParsing="false" onAction="#handleCameraForward" text="Scale">
                 <accelerator>
-                    <KeyCodeCombination alt="UP" code="UP" control="UP" meta="UP" shift="UP" shortcut="UP" />
+                    <KeyCodeCombination alt="UP" code="Q" control="UP" meta="UP" shift="UP" shortcut="UP" />
                 </accelerator>
             </MenuItem>
             <MenuItem mnemonicParsing="false" onAction="#handleCameraBackward" text="Upscale">
                 <accelerator>
-                    <KeyCodeCombination alt="UP" code="DOWN" control="UP" meta="UP" shift="UP" shortcut="UP" />
+                    <KeyCodeCombination alt="UP" code="E" control="UP" meta="UP" shift="UP" shortcut="UP" />
                 </accelerator>
             </MenuItem>
             <MenuItem mnemonicParsing="false" onAction="#handleCameraLeft" text="Left">
@@ -71,7 +71,7 @@
             </MenuItem>
             <MenuItem mnemonicParsing="false" onAction="#onPrintOriginalMesh" text="Back To Original Model">
                 <accelerator>
-                    <KeyCodeCombination alt="UP" code="M" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                    <KeyCodeCombination alt="UP" code="B" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
                 </accelerator>
             </MenuItem>
         </Menu>
@@ -84,17 +84,17 @@
             </MenuItem>
             <MenuItem mnemonicParsing="false" onAction="#onRasterizeModelRed" text="Rasterize (RED)">
                 <accelerator>
-                    <KeyCodeCombination alt="UP" code="R" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                    <KeyCodeCombination alt="UP" code="R" control="UP" meta="UP" shift="UP" shortcut="UP" />
                 </accelerator>
             </MenuItem>
             <MenuItem mnemonicParsing="false" onAction="#onRasterizeModelGreen" text="Rasterize (GREEN)">
                 <accelerator>
-                    <KeyCodeCombination alt="UP" code="G" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                    <KeyCodeCombination alt="UP" code="G" control="UP" meta="UP" shift="UP" shortcut="UP" />
                 </accelerator>
             </MenuItem>
             <MenuItem mnemonicParsing="false" onAction="#onRasterizeModelBlue" text="Rasterize (BLUE)">
                 <accelerator>
-                    <KeyCodeCombination alt="UP" code="B" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                    <KeyCodeCombination alt="UP" code="B" control="UP" meta="UP" shift="UP" shortcut="UP" />
                 </accelerator>
             </MenuItem>
         </Menu>
@@ -103,7 +103,7 @@
 
     <Canvas fx:id="canvas" height="870" width="1600" AnchorPane.topAnchor="30.0" />
 
-    <TabPane layoutX="14.0" layoutY="686.0" prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE">
+    <TabPane layoutX="1190.0" layoutY="13.0" prefHeight="200.0" prefWidth="228.0" tabClosingPolicy="UNAVAILABLE">
      <tabs>
        <Tab text="Delete Vertexes">
          <content>
@@ -113,15 +113,21 @@
                      <Label layoutX="25.0" layoutY="48.0" text="которые вы хотите удалить" />
                      <Label layoutX="50.0" layoutY="31.0" text="индексы вершин, " />
                      <TextField fx:id="textField1" layoutX="26.0" layoutY="86.0" promptText="vertexes..." />
-                     <Button layoutX="74.0" layoutY="132.0" mnemonicParsing="false"
-                             onAction="#onDeleteVertexes" text="Delete" />
+                     <Button layoutX="74.0" layoutY="132.0" mnemonicParsing="false" onAction="#onDeleteVertexes" text="Delete" />
                   </children>
                </AnchorPane>
          </content>
        </Tab>
-       <Tab text="Polygons">
+       <Tab text="Delete Polygons">
          <content>
-           <AnchorPane prefHeight="171.0" prefWidth="387.0" />
+           <AnchorPane prefHeight="171.0" prefWidth="387.0">
+                  <children>
+                      <Label layoutX="36.0" layoutY="14.0" text="Введите через запятую" />
+                      <Label layoutX="25.0" layoutY="48.0" text="которые вы хотите удалить" />
+                      <Label layoutX="42.0" layoutY="31.0" text="индексы полигонов, " />
+                      <TextField fx:id="textField2" layoutX="26.0" layoutY="86.0" promptText="polygons..." />
+                      <Button layoutX="74.0" layoutY="132.0" mnemonicParsing="false" onAction="#onDeletePolygons" text="Delete" />
+                  </children></AnchorPane>
          </content>
        </Tab>
      </tabs>
