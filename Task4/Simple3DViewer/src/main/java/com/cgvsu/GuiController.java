@@ -162,15 +162,24 @@ public class GuiController {
     @FXML
     private void onPrintOriginalMesh() {
         mesh = copyOfMesh.getCopy();
-        RenderEngine.render(canvas.getGraphicsContext2D(), camera, mesh, (int) canvas.getWidth(), (int) canvas.getHeight());
+        RenderEngine.renderColor(canvas.getGraphicsContext2D(), camera, mesh, (int) canvas.getWidth(), (int) canvas.getHeight(), Color.BLACK);
     }
 
     @FXML
-    private void onRasterizeModel() {
+    private void onRasterizeModelRed() {
+        RenderEngine.renderColor(canvas.getGraphicsContext2D(), camera, mesh, (int) canvas.getWidth(), (int) canvas.getHeight(),
+                Color.RED);
+    }
+    @FXML
+    private void onRasterizeModelGreen() {
         RenderEngine.renderColor(canvas.getGraphicsContext2D(), camera, mesh, (int) canvas.getWidth(), (int) canvas.getHeight(),
                 Color.GREEN);
     }
-
+    @FXML
+    private void onRasterizeModelBlue() {
+        RenderEngine.renderColor(canvas.getGraphicsContext2D(), camera, mesh, (int) canvas.getWidth(), (int) canvas.getHeight(),
+                Color.BLUE);
+    }
 
     private void showSaveSuccessAlert(Path filePath) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);

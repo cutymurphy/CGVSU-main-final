@@ -38,20 +38,6 @@ public class Matrix3f {
         return new Matrix3f(result);
     }
 
-    // Умножение матрицы на вектор3Д (теперь вектор - столбец)
-    public Vector3f multiply(Vector3f vector) {
-        if (vector == null) {
-            throw new NullPointerException("Вектор не может быть нулевым");
-        }
-        double[] result = new double[3];
-        for (int i = 0; i < 3; i++) {
-            result[i] = 0;
-            for (int j = 0; j < 3; j++) {
-                result[i] += this.matrix[j][i] * vector.get(j);
-            }
-        }
-        return new Vector3f(result[0], result[1], result[2]);
-    }
 
     // Умножение матрицы на матрицу (теперь векторы - столбцы)
     public Matrix3f multiply(Matrix3f other) {

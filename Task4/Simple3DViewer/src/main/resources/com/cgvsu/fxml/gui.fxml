@@ -57,20 +57,33 @@
             </MenuItem>
         </Menu>
 
-        <Menu mnemonicParsing="false" text="Triangulate Model">
+        <Menu mnemonicParsing="false" text="Model rendering">
             <MenuItem mnemonicParsing="false" onAction="#onTriangulateModel" text="Triangulate Model">
                 <accelerator>
                     <KeyCodeCombination alt="UP" control="DOWN" meta="UP" shift="UP" shortcut="UP" code="T"/>
                 </accelerator>
             </MenuItem>
-            <MenuItem mnemonicParsing="false" onAction="#onPrintOriginalMesh" text="Original Model">
+            <MenuItem mnemonicParsing="false" onAction="#onPrintOriginalMesh" text="Back To Original Model">
                 <accelerator>
-                    <KeyCodeCombination alt="UP" control="DOWN" meta="UP" shift="UP" shortcut="UP" code="B"/>
+                    <KeyCodeCombination alt="UP" control="DOWN" meta="UP" shift="UP" shortcut="UP" code="M"/>
                 </accelerator>
             </MenuItem>
-            <MenuItem mnemonicParsing="false" onAction="#onRasterizeModel" text="Rasterize Model">
+        </Menu>
+
+        <Menu mnemonicParsing="false" text="Color Model">
+            <MenuItem mnemonicParsing="false" onAction="#onRasterizeModelRed" text="Rasterize (RED)">
                 <accelerator>
                     <KeyCodeCombination alt="UP" control="DOWN" meta="UP" shift="UP" shortcut="UP" code="R"/>
+                </accelerator>
+            </MenuItem>
+            <MenuItem mnemonicParsing="false" onAction="#onRasterizeModelGreen" text="Rasterize (GREEN)">
+                <accelerator>
+                    <KeyCodeCombination alt="UP" control="DOWN" meta="UP" shift="UP" shortcut="UP" code="G"/>
+                </accelerator>
+            </MenuItem>
+            <MenuItem mnemonicParsing="false" onAction="#onRasterizeModelBlue" text="Rasterize (BLUE)">
+                <accelerator>
+                    <KeyCodeCombination alt="UP" control="DOWN" meta="UP" shift="UP" shortcut="UP" code="B"/>
                 </accelerator>
             </MenuItem>
         </Menu>
