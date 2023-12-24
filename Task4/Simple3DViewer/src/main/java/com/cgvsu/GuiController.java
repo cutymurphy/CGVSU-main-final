@@ -1,5 +1,7 @@
 package com.cgvsu;
 
+import com.cgvsu.deleteVertex.VertexDeleter;
+import com.cgvsu.deleteVertex.VertexDeleterException;
 import com.cgvsu.model.Model;
 import com.cgvsu.objreader.ObjReader;
 import com.cgvsu.objreader.ObjReaderException;
@@ -16,6 +18,7 @@ import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ColorPicker;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
@@ -26,8 +29,10 @@ import javax.vecmath.Vector3f;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Arrays;
 
 public class GuiController {
 
@@ -161,6 +166,32 @@ public class GuiController {
     }
 
     @FXML
+    private TextField textField1;
+
+    @FXML
+    private void onDeleteVertexes() {
+        String stringOfVertexes = textField1.getText();
+        try {
+            int[] indices = getNumbersFromStr(stringOfVertexes);
+            VertexDeleter.deleteVertices(mesh, indices);
+            RenderEngine.render(canvas.getGraphicsContext2D(), camera, mesh, (int) canvas.getWidth(), (int) canvas.getHeight());
+        } catch (VertexDeleterException | NumberFormatException exception) {
+            showDeleteVertexErrorAlert(exception);
+        }
+    }
+
+    private static int[] getNumbersFromStr(String str) {
+        String[] numbersArray = str.split("[,\\s]+"); // Разделение строки по запятой или пробелу с запятой
+
+        int[] numbers = new int[numbersArray.length]; // Создание массива для чисел
+
+        for (int i = 0; i < numbersArray.length; i++) {
+            numbers[i] = Integer.parseInt(numbersArray[i].trim()); // Преобразование строковых чисел в int
+        }
+        return numbers;
+    }
+
+    @FXML
     private ColorPicker colorPicker;
 
     @FXML
@@ -221,6 +252,14 @@ public class GuiController {
         alert.setTitle("Ошибка!!!");
         alert.setHeaderText(null);
         alert.setContentText("Ошибка при сохранении в модели файл " + error.toString());
+        alert.showAndWait();
+    }
+
+    private void showDeleteVertexErrorAlert(Exception error) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Ошибка!!!");
+        alert.setHeaderText(null);
+        alert.setContentText("Ошибка при удалении вершин модели " + error.toString());
         alert.showAndWait();
     }
 

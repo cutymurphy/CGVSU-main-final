@@ -14,11 +14,12 @@ public class VertexDeleter {
         if(model == null) {
             new VertexDeleterException("Model is null");
         }
+        assert model != null;
         ArrayList<Vector3f> vertices = model.vertices;
         ArrayList<Polygon> polygons = model.polygons;
         TreeSet<Integer> set = new TreeSet<>();
-        for(int i = 0; i < deletedVertexIndices.length; i++) {
-            set.add(deletedVertexIndices[i]);
+        for (int deletedVertexIndex : deletedVertexIndices) {
+            set.add(deletedVertexIndex);
         }
         int[] deletedVertexIndicesWithoutDuplicates = new int[set.size()];
         int m = 0;
