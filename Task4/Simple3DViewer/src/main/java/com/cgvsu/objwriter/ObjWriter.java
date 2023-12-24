@@ -1,10 +1,9 @@
 package com.cgvsu.objwriter;
 
-import com.cgvsu.math.vector.Vector2f;
-import com.cgvsu.math.vector.Vector3f;
 import com.cgvsu.model.Model;
 import com.cgvsu.model.Polygon;
 
+import javax.vecmath.*;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -32,21 +31,21 @@ public class ObjWriter {
 
     protected static void writeVerticesOfModel(PrintWriter printWriter, List<Vector3f> vertices) {
         for (Vector3f vertex : vertices) {
-            printWriter.println(OBJ_VERTEX_TOKEN + " " + vertex.getX() + " " + vertex.getY() + " " + vertex.getZ());
+            printWriter.println(OBJ_VERTEX_TOKEN + " " + vertex.x + " " + vertex.y + " " + vertex.z);
         }
         printWriter.println();
     }
 
     protected static void writeTextureVerticesOfModel(PrintWriter printWriter, List<Vector2f> textureVertices) {
         for (Vector2f vertex : textureVertices) {
-            printWriter.println(OBJ_TEXTURE_TOKEN + " " + vertex.getX() + " " + vertex.getY());
+            printWriter.println(OBJ_TEXTURE_TOKEN + " " + vertex.x + " " + vertex.y);
         }
         printWriter.println();
     }
 
     protected static void writeNormalsOfModel(PrintWriter printWriter, List<Vector3f> normals){
         for (Vector3f normal : normals) {
-            printWriter.println(OBJ_NORMAL_TOKEN + " " + normal.getX() + " " + normal.getY() + " " + normal.getZ());
+            printWriter.println(OBJ_NORMAL_TOKEN + " " + normal.x + " " + normal.y + " " + normal.z);
         }
         printWriter.println();
     }

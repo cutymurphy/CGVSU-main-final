@@ -1,6 +1,6 @@
 package com.cgvsu.triangulation;
 
-import com.cgvsu.math.vector.Vector3f;
+import javax.vecmath.*;
 import com.cgvsu.model.Model;
 import com.cgvsu.model.Polygon;
 
@@ -55,24 +55,24 @@ public class Triangulation {
         return indices;
     }
 
-    public static void recalculateNormals(Model model) {
+    /*public static void recalculateNormals(Model model) {
         model.normals.clear();
 
         for (int i = 0; i < model.vertices.size(); i++) {
             model.normals.add(calculateNormalForVertexInModel(model, i));
         }
-    }
+    }*/
 
     protected static Vector3f calculateNormalForPolygon(final Polygon polygon, final Model model){
 
         List<Integer> vertexIndices = polygon.getVertexIndices();
         int verticesCount = vertexIndices.size();
 
-        Vector3f vector1 = Vector3f.fromTwoPoints(model.vertices.get(vertexIndices.get(0)), model.vertices.get(vertexIndices.get(1)));
-        Vector3f vector2 = Vector3f.fromTwoPoints(model.vertices.get(vertexIndices.get(0)), model.vertices.get(vertexIndices.get(verticesCount - 1)));
+        Vector3f vector1 = fromTwoPoints(model.vertices.get(vertexIndices.get(0)), model.vertices.get(vertexIndices.get(1)));
+        Vector3f vector2 = fromTwoPoints(model.vertices.get(vertexIndices.get(0)), model.vertices.get(vertexIndices.get(verticesCount - 1)));
 
         Vector3f resultVector = new Vector3f();
-        resultVector.crossProduct(vector1, vector2);
+        resultVector = crossProduct(vector1, vector2);
         return resultVector;
     }
 
@@ -92,7 +92,45 @@ public class Triangulation {
             return new Vector3f();
         }
 
-        return Vector3f.sum(saved).divide(saved.size());
+        return divide(sum(saved),(saved.size()));
     }
+
+    private static double eps = 1e-4;
+
+    public static Vector3f divide(Vector3f vector3f, float scalar) {
+        if (Math.abs(scalar) < eps) {
+            throw new ArithmeticException("Деление на ноль");
+        }
+        return new Vector3f(vector3f.x / scalar, vector3f.y / scalar, vector3f.z / scalar);
+    }
+
+    // Векторное произведение векторов
+    public static Vector3f crossProduct(Vector3f first, Vector3f other) {
+        return new Vector3f(
+                first.y * other.z - first.z * other.y,
+                first.z * other.x - first.x * other.z,
+                first.x * other.y - first.y * other.x
+        );
+    }
+
+    public static Vector3f fromTwoPoints(Vector3f first, Vector3f second) {
+        return new Vector3f(second.x - first.x,
+                second.y - first.y,
+                second.z - first.z);
+    }
+
+    // Сложение векторов
+    public static Vector3f sum(ArrayList<Vector3f> vectors) {
+        Vector3f sum = new Vector3f();
+        for (Vector3f vector : vectors) {
+            sum = add(sum, vector);
+        }
+        return sum;
+    }
+
+    public static Vector3f add(Vector3f first, Vector3f other) {
+        return new Vector3f(first.x + other.x, first.y + other.y, first.z + other.z);
+    }
+
 
 }

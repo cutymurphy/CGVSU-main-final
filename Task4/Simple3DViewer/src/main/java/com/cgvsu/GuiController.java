@@ -1,35 +1,32 @@
 package com.cgvsu;
 
-import com.cgvsu.model.Polygon;
+import com.cgvsu.model.Model;
+import com.cgvsu.objreader.ObjReader;
 import com.cgvsu.objreader.ObjReaderException;
 import com.cgvsu.objwriter.ObjWriter;
 import com.cgvsu.objwriter.ObjWriterException;
+import com.cgvsu.render_engine.Camera;
 import com.cgvsu.render_engine.RenderEngine;
 import com.cgvsu.triangulation.TriangulatedModelWithCorrectNormal;
-import com.cgvsu.triangulation.Triangulation;
-import javafx.fxml.FXML;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Alert;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
+import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.io.IOException;
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
 import javax.vecmath.Vector3f;
 
-import com.cgvsu.model.Model;
-import com.cgvsu.objreader.ObjReader;
-import com.cgvsu.render_engine.Camera;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 public class GuiController {
 
@@ -89,8 +86,8 @@ public class GuiController {
                 double dragEndX = event.getX();
                 double dragEndY = event.getY();
 
-                double deltaX = (dragEndX - dragStartX) * 0.01;
-                double deltaY = (dragEndY - dragStartY) * 0.01;
+                double deltaX = (dragEndX - dragStartX) * 0.1;
+                double deltaY = (dragEndY - dragStartY) * 0.1;
 
                 camera.movePosition(new Vector3f((float) deltaX, (float) -deltaY, 0));
 
@@ -166,6 +163,12 @@ public class GuiController {
     private void onPrintOriginalMesh() {
         mesh = copyOfMesh.getCopy();
         RenderEngine.render(canvas.getGraphicsContext2D(), camera, mesh, (int) canvas.getWidth(), (int) canvas.getHeight());
+    }
+
+    @FXML
+    private void onRasterizeModel() {
+        RenderEngine.renderColor(canvas.getGraphicsContext2D(), camera, mesh, (int) canvas.getWidth(), (int) canvas.getHeight(),
+                Color.GREEN);
     }
 
 

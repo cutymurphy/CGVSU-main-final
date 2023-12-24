@@ -1,10 +1,9 @@
 package com.cgvsu.objreader;
 
-import com.cgvsu.math.vector.Vector2f;
-import com.cgvsu.math.vector.Vector3f;
 import com.cgvsu.model.Model;
 import com.cgvsu.model.Polygon;
 
+import javax.vecmath.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
